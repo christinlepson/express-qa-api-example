@@ -1,9 +1,13 @@
 'use strict';
 const express = require('express');
 const fetch = require('node-fetch');
+const Question = require('./models');
 const router = express.Router();
 
 router.get('/', (req, res) => {
+    Question.find({}, (err, questions) => {
+        
+    });
     res.json({response: 'You sent me a GET request'});
 });
 

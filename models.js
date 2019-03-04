@@ -18,7 +18,17 @@ const AnswerSchema = new Schema({
 });
 
 AnswerSchema.method('update', (updates, callback) => {
-    
+    Object.assign(this, updates, {updatedAt: new Date()});
+    this.parent().save(callback);
+});
+
+AnswerSchema.method('vote', (vote, callback) => {
+    if (vote === 'up') {
+        this.votes += 1;
+    } else {
+        this.votes -= 1;
+    }
+    this.parent().save(callback);
 });
 
 const QuestionSchema = new Schema({
